@@ -1,5 +1,9 @@
 ### Hi there 👋
 
+- 🔭 I’m currently working on traditional distributed systems, Backbase, Jenkins, CI/CD
+- 🌱 I’m currently learning Terraform, AWS, Python Flask, Quantum Computing
+
+
 <!--
 **elogs/elogs** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 

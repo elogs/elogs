@@ -61,6 +61,10 @@ docker run -it --name CONT_NAME IMAGE_NAME
 docker exec -it CONT_NAME bash (or sh)
 
 
+**************  IDEAS  *****************
+check status of code bases ds27 builder
+check status of sw-ecu builder
 
+-->> calendar week number script
 
 

@@ -1,0 +1,75 @@
+
+git add
+git commit -m '.'
+git reset --soft HEAD~2  (all commits +1 basically pointing to the commit before all your commits)
+git commit ***tunay na messg
+
+enable webhook
+git push origin +HEAD:bugfix/JIRA-24314  (+ used for squashing and editing PR)
+
+??? git rebase --root -i
+??? For each commit except the first, change pick to squash in the editor that pops up.
+
+normal push to branch:
+git push origin HEAD:feature/JIRA-24695
+
+REBASING LOCAL BRANCH: master branch
+git checkout master
+git pull
+git checkout feature/JIRA-24695
+git rebase master feature/JIRA-24695
+git status
+git log -n 5 --oneline
+git push origin +HEAD:feature/JIRA-24695
+
+
+CREATING LOCAL BRANCH THEN PUSHING
+** checkout to branch you want the new one to be based from
+CMD git checkout -b feature/testPR_commit_messg_validation
+ex new branch name: feature/testPR_commit_messg_validation
+** make changes and commit
+CMD git push -u origin HEAD:feature/testPR
+
+REVERTING (stuff merged in master)
+git clone ssh://git@stash.srv.volvo.com:7999/gttpe/vpt-jenkins-scripts.git temp
+cd temp
+git log
+git checkout -b revert_withcredentials_2
+git pull origin master --rebase
+git revert 291ecbdbc62ce606a03c18e9f6278b67d13ec6f
+git push -u origin HEAD:revert_withcredentials_2
+
+
+DELETING LOCAL BRANCH
+git branch -d <local-branch> (only for merged branches)
+git branch -D <local-branch>
+
+
+TAGGING 
+Go to your commit, add new tag like a label (at the end of commit messg)
+
+REMOVE LARGE FILES FROM GIT HISTORY
+* reducing repo size
+
+git filter-branch --force --index-filter \
+'git rm --cached --ignore-unmatch large_file.html' \
+--prune-empty --tag-name-filter cat -- --all
+
+git reflog expire --expire=now --all
+git gc --prune=now --aggressive
+
+only if needed: git push --force
+
+
+GIT DIFF
+unstaged: git diff
+  staged: git diff --staged
+
+
+branch vs master: 
+git diff master
+
+branch w/ local commits:
+git diff master...HEAD
+
+git difftool --cached --no-prompt

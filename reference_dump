@@ -1,0 +1,40 @@
+***** CONTAINER BUILDER ******
+CREATE UBUNTU compatible container, with mapped repos dir
+docker run -it --name ubContainer -v /home/elogs/repos:/repos -v /var/bazel:/var/bazel ubuntu:22.04 bash
+
+**APT INSTALL binutils tk and python 3.10
+apt update
+apt install -y python3.10 python3.10-venv python3.10-dev
+apt install -y binutils
+apt install -y python3-tk
+
+**CREATE and activate venv   cd /home/repos/pyProj
+python3 -m venv venv
+source venv/bin/activate
+
+pip install -r setup/requirements.txt
+pip install -r setup/requirements_test.txt
+pip install --disable-pip-version-check -q -r setup/requirements.txt
+pip install --disable-pip-version-check -q -r setup/requirements_test.txt
+pip install --disable-pip-version-check tabulate
+
+**** skip here if above is already existing
+INSTALL PIP packages ----
+cd /home/repos/pyProj
+source venv/bin/activate
+
+chmod 755 vision scripts?
+
+pip install pyinstaller==6.18
+pip install pyProj==.... --index-url https://esw-artifactory.got.volvo.net/artifactory/api/pypi/pip/simple --trusted-host esw-artifactory.got.volvo.net
+
+RUN pyinstaller -- this will take from the src files -
+pyinstaller --noconfirm --onedir --workpath ./devtool_build --distpath ./devtool_dist --hidden-import=pythoncom -n pyProj --add-data="src/pyProj/config/config.json:pyProj/config" --add-data="src/pyProj/lib/vision_scripts:pyProj/lib/vision_scripts" --copy-metadata pyProj ./src/pyProj/__main__.py
+
+IMAGE: in pees-docker/pyProj_build
+copy build artifacts
+cp -R ~/repos/pyProj/devtool_dist/pyProj/_internal/ ~/repos/pyProj/devtool_dist/pyProj/pyProj ./
+tar -czf pyProj_build.tar.gz pyProj_build
+
+
+docker build -t pyProjimage .

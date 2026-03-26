@@ -38,3 +38,29 @@ tar -czf pyProj_build.tar.gz pyProj_build
 
 
 docker build -t pyProjimage .
+
+-----------------------------------------------------
+
+
+**STOP AND REMOVE CONTAINERS
+docker ps -a  (to get container names/ids)
+docker stop containerName1 containerName2
+docker remove containerName1 containerName2
+
+**REMOVE IMAGES
+docker images
+docker rmi someImageName someImageID
+
+**BUILD IMAGE with a Dockerfile
+docker build -t YourimageName .
+
+**Create/Run a container
+docker run -it --name CONT_NAME IMAGE_NAME
+
+**Go inside a container
+docker exec -it CONT_NAME bash (or sh)
+
+
+
+
+
